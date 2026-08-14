@@ -104,11 +104,11 @@
         <bt:Url id="pt.TaskpaneUrl" DefaultValue="https://localhost:3000/taskpane.html" />
       </bt:Urls>
       <bt:ShortStrings>
-        <bt:String id="pt.GroupLabel" DefaultValue="PhishTest" />
-        <bt:String id="pt.ButtonLabel" DefaultValue="Check Headers" />
+        <bt:String id="PhishTest.GroupLabel" DefaultValue="PhishTest" />
+        <bt:String id="PhishTest.OpenPaneButton.Label" DefaultValue="Check Headers" />
       </bt:ShortStrings>
       <bt:LongStrings>
-        <bt:String id="pt.ButtonTip" DefaultValue="Opens the PhishTest header checker pane for the current message." />
+        <bt:String id="PhishTest.OpenPaneButton.Tooltip" DefaultValue="Opens the PhishTest header checker pane for the current message." />
       </bt:LongStrings>
     </Resources>
 

@@ -79,10 +79,16 @@ Outlook add-ins require HTTPS. You need a self-signed certificate:
 
 ```bash
 # Generate a self-signed certificate
+# NOTE: the Subject Alternative Name is required — Outlook's webview rejects
+# certificates that only have CN=localhost and no SAN.
 mkdir -p certs
 openssl req -x509 -newkey rsa:2048 -keyout certs/key.pem \
   -out certs/cert.pem -days 365 -nodes \
-  -subj "/CN=localhost"
+  -subj "/CN=localhost" \
+  -addext "subjectAltName=DNS:localhost,IP:127.0.0.1"
+
+# Trust the certificate in the macOS login keychain
+security add-trusted-cert -r trustRoot -k ~/Library/Keychains/login.keychain-db certs/cert.pem
 
 # Start the HTTPS server
 npm start
