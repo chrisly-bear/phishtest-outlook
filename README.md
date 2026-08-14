@@ -62,13 +62,13 @@ phishtest-addin/
 
 ```bash
 cd phishtest-addin
-npm install
+pnpm install
 ```
 
 ### 2. Run the parser unit tests
 
 ```bash
-npm test
+pnpm test
 ```
 
 This runs 14 tests covering: simple header matching, case-insensitivity, RFC 5322 header folding, multiple headers with the same name, empty values, whitespace handling, and more.
@@ -91,7 +91,7 @@ openssl req -x509 -newkey rsa:2048 -keyout certs/key.pem \
 security add-trusted-cert -r trustRoot -k ~/Library/Keychains/login.keychain-db certs/cert.pem
 
 # Start the HTTPS server
-npm start
+pnpm start
 ```
 
 The task pane will be served at `https://localhost:3000/taskpane.html`.
@@ -119,6 +119,17 @@ Source: [Microsoft Learn — Sideload Outlook add-ins on Mac](https://learn.micr
 ### 6. Pin the task pane (optional but recommended)
 
 Click the pin icon on the task pane to keep it open. When pinned, it automatically re-checks each message as you select different emails in the list.
+
+### 7. Clear the Outlook add-in cache
+
+To make sure Outlook uses the latest version of the add-in, you can clear its add-in cache by removing the following files. Make sure that Outlook is not running.
+
+```bash
+rm -rf ~/Library/Containers/com.Microsoft.OsfWebHost/Data
+rm -rf ~/Library/Containers/com.microsoft.Outlook/Data/Documents/wef
+rm -rf ~/Library/Containers/com.microsoft.Outlook/Data/Library/Caches/WebKit
+rm -rf ~/Library/WebKit/com.microsoft.Outlook
+```
 
 ## How to add an X-PHISHTEST header for testing
 
