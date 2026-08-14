@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PhishTest Header Checker</title>
+    <script src="https://appsforoffice.microsoft.com/lib/1/host/office.js" type="text/javascript"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            color: #323130;
+            background: #faf9f8;
+            padding: 16px;
+        }
+
+        h1 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #201f1e;
+        }
+
+        .description {
+            font-size: 13px;
+            color: #605e5c;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        button {
+            background: #0078d4;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-bottom: 16px;
+            width: 100%;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background: #106ebe;
+        }
+
+        button:active {
+            background: #005a9e;
+        }
+
+        button:disabled {
+            background: #c8c6c4;
+            cursor: not-allowed;
+        }
+
+        .status {
+            font-size: 13px;
+            padding: 10px 12px;
+            border-radius: 4px;
+            margin-bottom: 12px;
+            display: none;
+        }
+
+        .status.warning {
+            background: #fff4ce;
+            border: 1px solid #fec80b;
+            color: #83550c;
+            display: block;
+        }
+
+        .status.success {
+            background: #dff6dd;
+            border: 1px solid #107c10;
+            color: #0b6a0b;
+            display: block;
+        }
+
+        .status.error {
+            background: #fde7e9;
+            border: 1px solid #d13438;
+            color: #a4262c;
+            display: block;
+        }
+
+        .status.loading {
+            background: #f0f0f0;
+            border: 1px solid #c8c6c4;
+            color: #605e5c;
+            display: block;
+        }
+
+        .header-value {
+            background: #fff;
+            border: 1px solid #edebe9;
+            border-radius: 4px;
+            padding: 12px;
+            font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+            word-break: break-all;
+            margin-bottom: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .header-value.visible {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #605e5c;
+            margin-bottom: 6px;
+            margin-top: 12px;
+        }
+
+        .note {
+            font-size: 12px;
+            color: #8a8886;
+            margin-top: 16px;
+            line-height: 1.5;
+            border-top: 1px solid #edebe9;
+            padding-top: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>PhishTest Header Checker</h1>
+    <p class="description">
+        Checks the current email for an <code>X-PHISHTEST</code> header.
+        If found, its value is displayed as a red warning banner above the
+        message body.
+    </p>
+
+    <button id="checkButton">Check Current Message</button>
+
+    <div id="status" class="status"></div>
+
+    <div class="section-title" id="headerLabel" style="display:none;">X-PHISHTEST header value:</div>
+    <div id="headerValue" class="header-value"></div>
+
+    <div class="note">
+        <strong>Note:</strong> Outlook's Office.js API does not provide a
+        "WarningMessage" notification type. This add-in uses
+        <code>ErrorMessage</code> (red banner with Dismiss) as the closest
+        visual equivalent. The notification appears above the email body in
+        the reading pane.
+    </div>
+
+    <script src="taskpane.js"></script>
+</body>
+</html>

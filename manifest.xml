@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OfficeApp
+    xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+    xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides/1.0"
+    xsi:type="MailApp">
+
+  <!-- Basic metadata -->
+  <Id>7a3f2e1b-4c5d-6789-abcd-ef0123456789</Id>
+  <Version>1.0.0.0</Version>
+  <ProviderName>PhishTest Add-in</ProviderName>
+  <DefaultLocale>en-US</DefaultLocale>
+  <DisplayName DefaultValue="PhishTest Header Checker" />
+  <Description DefaultValue="Checks for the X-PHISHTEST header and displays a warning notification if found." />
+
+  <!-- Icon references -->
+  <IconUrl DefaultValue="https://localhost:3000/assets/icon-32.png" />
+  <HighResolutionIconUrl DefaultValue="https://localhost:3000/assets/icon-80.png" />
+
+  <!-- Support for Mac/Windows/Web -->
+  <SupportUrl DefaultValue="https://github.com/your-repo/phishtest-addin" />
+
+  <!-- Hosts: Outlook only -->
+  <Hosts>
+    <Host Name="Mailbox" />
+  </Hosts>
+
+  <!-- Requirement: Mailbox 1.8 for getAllInternetHeadersAsync -->
+  <Requirements>
+    <Sets>
+      <Set Name="Mailbox" MinVersion="1.8" />
+    </Sets>
+  </Requirements>
+
+  <!-- Form settings for read mode -->
+  <FormSettings>
+    <Form xsi:type="ItemRead">
+      <DesktopSettings>
+        <SourceLocation DefaultValue="https://localhost:3000/taskpane.html" />
+        <RequestedHeight>250</RequestedHeight>
+      </DesktopSettings>
+    </Form>
+  </FormSettings>
+
+  <!-- Permission: ReadItem required for getAllInternetHeadersAsync -->
+  <Permissions>ReadItem</Permissions>
+
+  <!-- Activation rule: Message Read -->
+  <Rule xsi:type="RuleCollection" Mode="Or">
+    <Rule xsi:type="ItemIs" ItemType="Message" FormType="Read" />
+  </Rule>
+
+  <!-- DisableEntityHighlighting -->
+  <DisableEntityHighlighting>false</DisableEntityHighlighting>
+
+  <!-- VersionOverrides v1.0 for command surface -->
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides" xsi:type="VersionOverridesV1_0">
+    <Requirements>
+      <bt:Sets>
+        <bt:Set Name="Mailbox" MinVersion="1.8" />
+      </bt:Sets>
+    </Requirements>
+
+    <!-- Hosts -->
+    <Hosts>
+      <Host xsi:type="MailHost">
+        <DesktopFormFactor>
+          <!-- Read form -->
+          <ExtensionPoint xsi:type="MessageReadCommandSurface">
+            <OfficeTab id="TabDefault">
+              <Group id="PhishTest.Group">
+                <Label resid="PhishTest.GroupLabel" />
+                <Control xsi:type="Button" id="PhishTest.OpenPaneButton">
+                  <Label resid="PhishTest.OpenPaneButton.Label" />
+                  <Supertip>
+                    <Title resid="PhishTest.OpenPaneButton.Label" />
+                    <Description resid="PhishTest.OpenPaneButton.Tooltip" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="PhishTest.Icon16" />
+                    <bt:Image size="32" resid="PhishTest.Icon32" />
+                    <bt:Image size="80" resid="PhishTest.Icon80" />
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <SourceLocation resid="pt.TaskpaneUrl" />
+                  </Action>
+                </Control>
+              </Group>
+            </OfficeTab>
+          </ExtensionPoint>
+        </DesktopFormFactor>
+      </Host>
+    </Hosts>
+
+    <!-- Resources -->
+    <Resources>
+      <bt:Images>
+        <bt:Image id="PhishTest.Icon16" DefaultValue="https://localhost:3000/assets/icon-16.png" />
+        <bt:Image id="PhishTest.Icon32" DefaultValue="https://localhost:3000/assets/icon-32.png" />
+        <bt:Image id="PhishTest.Icon80" DefaultValue="https://localhost:3000/assets/icon-80.png" />
+      </bt:Images>
+      <bt:Urls>
+        <bt:Url id="pt.TaskpaneUrl" DefaultValue="https://localhost:3000/taskpane.html" />
+      </bt:Urls>
+      <bt:ShortStrings>
+        <bt:String id="pt.GroupLabel" DefaultValue="PhishTest" />
+        <bt:String id="pt.ButtonLabel" DefaultValue="Check Headers" />
+      </bt:ShortStrings>
+      <bt:LongStrings>
+        <bt:String id="pt.ButtonTip" DefaultValue="Opens the PhishTest header checker pane for the current message." />
+      </bt:LongStrings>
+    </Resources>
+
+    <!-- VersionOverrides v1.1 for pinning support on Mac -->
+    <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides/1.1" xsi:type="VersionOverridesV1_1">
+      <Requirements>
+        <bt:Sets>
+          <bt:Set Name="Mailbox" MinVersion="1.8" />
+        </bt:Sets>
+      </Requirements>
+
+      <Hosts>
+        <Host xsi:type="MailHost">
+          <DesktopFormFactor>
+            <ExtensionPoint xsi:type="MessageReadCommandSurface">
+              <OfficeTab id="TabDefault">
+                <Group id="pt.Group1">
+                  <Label resid="pt.GroupLabel1" />
+                  <Control xsi:type="Button" id="pt.Button1">
+                    <Label resid="pt.ButtonLabel1" />
+                    <Supertip>
+                      <Title resid="pt.ButtonLabel1" />
+                      <Description resid="pt.ButtonTip1" />
+                    </Supertip>
+                    <Icon>
+                      <bt:Image size="16" resid="PhishTest.Icon16" />
+                      <bt:Image size="32" resid="PhishTest.Icon32" />
+                      <bt:Image size="80" resid="PhishTest.Icon80" />
+                    </Icon>
+                    <Action xsi:type="ShowTaskpane">
+                      <SourceLocation resid="pt.TaskpaneUrl1" />
+                      <SupportsPinning>true</SupportsPinning>
+                    </Action>
+                  </Control>
+                </Group>
+              </OfficeTab>
+            </ExtensionPoint>
+          </DesktopFormFactor>
+        </Host>
+      </Hosts>
+
+      <Resources>
+        <bt:Images>
+          <bt:Image id="PhishTest.Icon16" DefaultValue="https://localhost:3000/assets/icon-16.png" />
+          <bt:Image id="PhishTest.Icon32" DefaultValue="https://localhost:3000/assets/icon-32.png" />
+          <bt:Image id="PhishTest.Icon80" DefaultValue="https://localhost:3000/assets/icon-80.png" />
+        </bt:Images>
+        <bt:Urls>
+          <bt:Url id="pt.TaskpaneUrl1" DefaultValue="https://localhost:3000/taskpane.html" />
+        </bt:Urls>
+        <bt:ShortStrings>
+          <bt:String id="pt.GroupLabel1" DefaultValue="PhishTest" />
+          <bt:String id="pt.ButtonLabel1" DefaultValue="Check Headers" />
+        </bt:ShortStrings>
+        <bt:LongStrings>
+          <bt:String id="pt.ButtonTip1" DefaultValue="Opens the PhishTest header checker pane for the current message." />
+        </bt:LongStrings>
+      </Resources>
+    </VersionOverrides>
+  </VersionOverrides>
+</OfficeApp>

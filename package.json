@@ -1,0 +1,22 @@
+{
+  "name": "phishtest-outlook-addin",
+  "version": "1.0.0",
+  "description": "Outlook add-in that checks for the X-PHISHTEST header and displays a warning notification",
+  "scripts": {
+    "start": "npx http-server . -p 3000 -S -C certs/cert.pem -K certs/key.pem --cors",
+    "start-http": "npx http-server . -p 3000 --cors",
+    "validate": "pnpx office-addin-manifest validate manifest.xml",
+    "test": "node test/parser.test.js"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "keywords": [
+    "outlook",
+    "add-in",
+    "office-js",
+    "phishing",
+    "headers"
+  ],
+  "license": "MIT"
+}
