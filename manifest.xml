@@ -11,7 +11,7 @@
   <Version>1.0.0.0</Version>
   <ProviderName>PhishTest Add-in</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
-  <DisplayName DefaultValue="PhishTest Header Checker" />
+  <DisplayName DefaultValue="Phishing" />
   <Description DefaultValue="Checks for the X-PHISHTEST header and displays a warning notification if found." />
 
   <!-- Icon references -->
@@ -108,7 +108,7 @@
         <bt:String id="PhishTest.OpenPaneButton.Label" DefaultValue="Check Headers" />
       </bt:ShortStrings>
       <bt:LongStrings>
-        <bt:String id="PhishTest.OpenPaneButton.Tooltip" DefaultValue="Opens the PhishTest header checker pane for the current message." />
+        <bt:String id="PhishTest.OpenPaneButton.Tooltip" DefaultValue="Opens the Phishing Campaign Detector pane for the current message." />
       </bt:LongStrings>
     </Resources>
 
@@ -164,7 +164,7 @@
           <bt:String id="pt.ButtonLabel1" DefaultValue="Check Headers" />
         </bt:ShortStrings>
         <bt:LongStrings>
-          <bt:String id="pt.ButtonTip1" DefaultValue="Opens the PhishTest header checker pane for the current message." />
+          <bt:String id="pt.ButtonTip1" DefaultValue="Opens the Phishing Campaign Detector pane for the current message." />
         </bt:LongStrings>
       </Resources>
     </VersionOverrides>

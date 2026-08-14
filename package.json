@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Outlook add-in that checks for the X-PHISHTEST header and displays a warning notification",
   "scripts": {
-    "start": "npx http-server . -p 3000 -S -C certs/cert.pem -K certs/key.pem --cors",
-    "start-http": "npx http-server . -p 3000 --cors",
+    "start": "pnpx http-server . -p 3000 -c-1 -S -C certs/cert.pem -K certs/key.pem --cors",
+    "start-http": "pnpx http-server . -p 3000 -c-1 --cors",
     "validate": "pnpx office-addin-manifest validate manifest.xml",
     "test": "node test/parser.test.js"
   },

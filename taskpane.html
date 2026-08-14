@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PhishTest Header Checker</title>
+    <title>Phishing Campaign Detector</title>
     <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js" type="text/javascript"></script>
     <style>
         * {
@@ -122,22 +122,13 @@
             margin-bottom: 6px;
             margin-top: 12px;
         }
-
-        .note {
-            font-size: 12px;
-            color: #8a8886;
-            margin-top: 16px;
-            line-height: 1.5;
-            border-top: 1px solid #edebe9;
-            padding-top: 12px;
-        }
     </style>
 </head>
 <body>
-    <h1>PhishTest Header Checker</h1>
+    <h1>Phishing Campaign Detector</h1>
     <p class="description">
         Checks the current email for an <code>X-PHISHTEST</code> header.
-        If found, its value is displayed as a red warning banner above the
+        If found, its value is displayed in a warning banner above the
         message body.
     </p>
 
@@ -147,14 +138,6 @@
 
     <div class="section-title" id="headerLabel" style="display:none;">X-PHISHTEST header value:</div>
     <div id="headerValue" class="header-value"></div>
-
-    <div class="note">
-        <strong>Note:</strong> Outlook's Office.js API does not provide a
-        "WarningMessage" notification type. This add-in uses
-        <code>ErrorMessage</code> (red banner with Dismiss) as the closest
-        visual equivalent. The notification appears above the email body in
-        the reading pane.
-    </div>
 
     <script src="taskpane.js"></script>
 </body>

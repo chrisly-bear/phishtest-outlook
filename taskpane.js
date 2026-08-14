@@ -1,5 +1,5 @@
 /*
- * PhishTest Header Checker - Outlook Add-in
+ * Phishing Campaign Detector - Outlook Add-in
  *
  * Looks for the X-PHISHTEST header in the current email.
  * If found, displays its value as an ErrorMessage notification

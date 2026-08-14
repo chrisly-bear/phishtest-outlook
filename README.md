@@ -1,4 +1,4 @@
-# PhishTest Header Checker — Outlook Add-in
+# Phishing Campaign Detector — Outlook Add-in
 
 An Outlook add-in that inspects the headers of the currently selected email and looks for an `X-PHISHTEST` header. If found, it displays the header's contents as a red warning banner (notification) above the message body in the Outlook reading pane.
 
