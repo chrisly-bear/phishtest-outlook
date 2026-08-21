@@ -2,21 +2,6 @@
 
 An Outlook add-in that inspects the headers of the currently selected email and looks for an `X-PHISHTEST` header. If found, it displays the header's contents as a red warning banner (notification) above the message body in the Outlook reading pane.
 
-## Important note on notification types
-
-The Office.js API **does not provide a `WarningMessage` notification type**. The available notification types are:
-
-| Type | Visual | API set |
-|---|---|---|
-| `InformationalMessage` | Blue info banner with icon | 1.3 |
-| `ErrorMessage` | Red error banner with Dismiss | 1.3 |
-| `ProgressIndicator` | Progress spinner | 1.3 |
-| `InsightMessage` | Info banner with action button | 1.10 |
-
-This add-in uses **`ErrorMessage`** (red banner) as the closest visual equivalent to a warning. The banner includes a Dismiss button and can be set to persist across message changes.
-
-Sources: [Microsoft Learn — ItemNotificationMessageType enum](https://learn.microsoft.com/en-us/javascript/api/outlook/office.mailboxenums.itemnotificationmessagetype), [Microsoft Learn — Create notifications](https://learn.microsoft.com/en-us/office/dev/add-ins/outlook/notifications)
-
 ## How it works
 
 1. The add-in activates in **Message Read** mode (when a message is opened or selected in the reading pane).
