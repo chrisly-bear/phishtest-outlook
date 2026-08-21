@@ -144,3 +144,6 @@ vite.config.ts.timestamp-*
 
 # certificates
 certs/
+
+# generated production manifest
+manifest.prod.xml

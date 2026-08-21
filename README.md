@@ -28,17 +28,19 @@ Source: [Microsoft Learn — Outlook API requirement sets](https://learn.microso
 
 ```
 phishtest-addin/
-├── manifest.xml          # Add-in manifest (classic XML format)
-├── taskpane.html         # Task pane UI
-├── taskpane.js           # Header parsing and notification logic
-├── package.json          # Scripts and dependencies
+├── manifest.xml               # Add-in manifest (classic XML format, points at localhost)
+├── taskpane.html              # Task pane UI
+├── taskpane.js                # Header parsing and notification logic
+├── package.json               # Scripts and dependencies
+├── scripts/
+│   └── make-prod-manifest.js  # Generates manifest.prod.xml from manifest.xml
 ├── assets/
-│   ├── icon-16.png       # 16x16 icon
-│   ├── icon-32.png       # 32x32 icon
-│   └── icon-80.png       # 80x80 icon
+│   ├── icon-16.png            # 16x16 icon
+│   ├── icon-32.png            # 32x32 icon
+│   └── icon-80.png            # 80x80 icon
 ├── test/
-│   └── parser.test.js    # Unit tests for header parser
-└── README.md             # This file
+│   └── parser.test.js         # Unit tests for header parser
+└── README.md                  # This file
 ```
 
 ## Setup and local testing
@@ -114,6 +116,43 @@ rm -rf ~/Library/Containers/com.Microsoft.OsfWebHost/Data
 rm -rf ~/Library/Containers/com.microsoft.Outlook/Data/Documents/wef
 rm -rf ~/Library/Containers/com.microsoft.Outlook/Data/Library/Caches/WebKit
 rm -rf ~/Library/WebKit/com.microsoft.Outlook
+```
+
+## Production deployment
+
+`manifest.xml` points all URLs (task pane, icons) at `https://localhost:3000`, which is only useful for local development. For production, generate a manifest that references your real domain instead — no need to maintain a second copy of the manifest by hand.
+
+### 1. Host the add-in files on your production server
+
+Serve `taskpane.html`, `taskpane.js`, and the `assets/` directory from an HTTPS domain with a valid (CA-signed) certificate, e.g.:
+
+```
+https://addin.example.com/taskpane.html
+https://addin.example.com/assets/icon-80.png
+```
+
+Outlook requires HTTPS; self-signed certificates are not accepted in production.
+
+### 2. Generate the production manifest
+
+```bash
+ADDIN_BASE_URL=https://addin.example.com pnpm manifest:prod
+```
+
+This reads `manifest.xml`, replaces every `https://localhost:3000` with `$ADDIN_BASE_URL`, and writes `manifest.prod.xml`. The generated file is gitignored — regenerate it at deploy time rather than committing it.
+
+The script validates the URL and fails with a clear error if `ADDIN_BASE_URL` is missing, not `https://`, or contains a path.
+
+### 3. Deploy the add-in
+
+Upload `manifest.prod.xml` via the **Microsoft 365 admin center** (**Settings** → **Integrated apps** → **Upload custom apps**) for centralized deployment across your organization, or distribute it to individual users for sideloading.
+
+> **Note:** Both manifests share the same add-in `<Id>`, so installing the production manifest replaces a sideloaded development copy of the add-in (and vice versa). This is normally the desired upgrade behavior.
+
+### 4. Validate before deploying (optional)
+
+```bash
+pnpm validate manifest.prod.xml
 ```
 
 ## How to add an X-PHISHTEST header for testing
