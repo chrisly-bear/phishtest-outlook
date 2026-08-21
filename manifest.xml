@@ -19,7 +19,7 @@
   <HighResolutionIconUrl DefaultValue="https://localhost:3000/assets/icon-80.png" />
 
   <!-- Support for Mac/Windows/Web -->
-  <SupportUrl DefaultValue="https://github.com/your-repo/phishtest-addin" />
+  <SupportUrl DefaultValue="https://github.com/chrisly-bear/phishtest-outlook" />
 
   <!-- Hosts: Outlook only -->
   <Hosts>
